@@ -1,0 +1,15 @@
+<h1>{{ media_type }} Index</h1>
+<h4>Sorted by A-Z</h4>
+{% if item_list %}
+    <ul>
+        {% for item in item_list %}
+        <li>
+                <a href="/{{ item.id }}"> 
+                    {{ item.name }}
+                </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %} 
+        <p>Sorry, no entries found.</p>
+{% endif %}

@@ -1,0 +1,68 @@
+<a href='/'>Back to homepage</a>
+
+<h3> {{item.media_type}} </h3>
+
+<h4>Name: {{ item.name }}</h4>
+<h4>Review Score: {{ item.review_score }}</h4>
+<h5>Short Name: {{ item.short_name }}</h5>
+<h4>Long Description</h4>
+<p> {{ item.long_description }}</p>
+
+<h4>Short Description</h4>
+<p>{{ item.short_description }}</p>
+Check out IGN's review <a href="{{ item.review_url }}" target="_blank">here</a>
+
+{% if item.genres %}
+    <h4>Genres</h4>
+    <ul>
+        {% for genre in item.genres %}
+        <li>
+            {{ genre }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if item.created_by %}
+    <h4>Created By</h4>   
+    <ul>
+        {% for creator in item.created_by %}
+        <li>
+            {{ creator }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if item.published_by %}
+    <h4>Published By</h4>
+    <ul>
+        {% for publisher in item.published_by %}
+        <li>
+            {{ publisher }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if item.franchises %}
+    <h4>Franchises</h4>
+    <ul>
+        {% for franchise in item.franchises %}
+        <li>
+            {{ franchise }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if item.regions %}
+    <h4>Regions</h4>
+    <ul>
+        {% for region in item.regions %}
+        <li>
+            {{ region }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
