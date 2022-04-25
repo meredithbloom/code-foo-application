@@ -1,4 +1,2 @@
 # ign-application
 backend
-
-
