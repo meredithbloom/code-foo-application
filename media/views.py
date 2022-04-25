@@ -38,13 +38,20 @@ def masterDetail(request, id):
     return render(request, 'media/detail.html', {'item': queryset})
 
 
+# FILTERED VIEWS (by media type)
 # GAME VIEWS
 
 class GameList(generics.ListAPIView):
     queryset = Media.objects.filter(media_type='Game')
     serializer_class = MediaSerializer
     
-    
+
+def gameIndex(request):
+    queryset = Media.objects.filter(media_type='Game').order_by('-review_score')
+    serializer_class = MediaSerializer
+    context = {'item_list': queryset}
+    return render(request, 'media/index.html', context)
+
 # class gameIndex(request):
 #     queryset = Media.objects.filter(media_type='Game')
 #     context = {'category_list': queryset}
@@ -56,7 +63,7 @@ class GameDetail(generics.RetrieveAPIView):
     
     
 
-# movie views
+# MOVIE VIEWS
 
 class MovieList(generics.ListAPIView):
     queryset = Media.objects.filter(media_type='Movie')
@@ -67,27 +74,41 @@ class MovieDetail(generics.RetrieveAPIView):
     queryset = Media.objects.filter(media_type='Movie')
     serializer_class = MediaSerializer
 
-# comic views
+# COMIC VIEWS
 
 class ComicList(generics.ListAPIView):
     queryset = Media.objects.filter(media_type='Comic')
     serializer_class = MediaSerializer
 
+class ComicListByRating(generics.ListAPIView):
+    queryset = Media.objects.filter(media_type='Comic').order_by('-review_score')
+    serializer_class = MediaSerializer
 
 class ComicDetail(generics.RetrieveAPIView):
     queryset = Media.objects.filter(media_type='Comic')
     serializer_class = MediaSerializer
 
 
+# TV SHOW VIEWS
 
+# all tv shows, ordered by id (A-Z)
+class TVShowList(generics.ListAPIView):
+    queryset = Media.objects.filter(media_type='Show')
+    serializer_class = MediaSerializer
+    
+# all tv shows, ordered by rating (descending)    
+class TVShowListByRating(generics.ListAPIView):
+    queryset = Media.objects.filter(media_type='Show').order_by('-review_score')
+    serializer_class = MediaSerializer
 
-# show views
-
-class ShowList(generics.ListAPIView):
+# tv show detail
+class TVShowDetail(generics.RetrieveAPIView):
     queryset = Media.objects.filter(media_type='Show')
     serializer_class = MediaSerializer
 
 
-class ShowDetail(generics.RetrieveAPIView):
-    queryset = Media.objects.filter(media_type='Show')
+# SORTING VIEWS
+
+class MediaListByRating(generics.ListAPIView):
+    queryset = Media.objects.all().order_by('-review_score')
     serializer_class = MediaSerializer
