@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.template import loader
 from .models import Media
 from rest_framework import generics 
-from .serializers import MediaSerializer
+from .serializers import MediaSerializer, GenreSerializer, PublisherSerializer
 
 
 
@@ -147,3 +147,25 @@ class TVShowDetail(generics.RetrieveAPIView):
 class MediaListByRating(generics.ListAPIView):
     queryset = Media.objects.all().order_by('-review_score')
     serializer_class = MediaSerializer
+    
+
+# MORE FILTERS
+
+class NetflixList(generics.ListAPIView):
+    queryset = Media.objects.filter(published_by__icontains='Netflix')
+    serializer_class = MediaSerializer
+
+
+# class GenreList(generics.ListAPIView):
+#     queryset = Media.objects.all()
+#     serializer_class = GenreSerializer
+
+
+class GenreList(generics.ListAPIView):
+    queryset = Media.objects.filter(genres__icontains='drama')
+    serializer_class = MediaSerializer
+
+
+class PublisherList(generics.ListAPIView):
+    queryset = Media.objects.all()
+    serializer_class = PublisherSerializer

@@ -51,7 +51,20 @@ urlpatterns = [
     # get all tv shows (review score, descending)
     path('api/items/shows/rating', views.TVShowListByRating.as_view(), name='tv-show-by-rating-api'), 
     # get specific tv show
-    path('api/items/shows/<int:pk>', views.TVShowDetail.as_view(), name='tv-show-detail-api')
+    path('api/items/shows/<int:pk>', views.TVShowDetail.as_view(), name='tv-show-detail-api'),
+    
+    
+    # other filters
+    
+    # netflix
+    path('api/items/netflix', views.NetflixList.as_view(), name='netflix-list-api'),
+    
+    # show all genres
+    path('api/drama', views.GenreList.as_view(), name='drama'),
+    
+    # show all publishers
+    path('api/publishers', views.PublisherList.as_view(), name='publishers')
+    
     
     
 
