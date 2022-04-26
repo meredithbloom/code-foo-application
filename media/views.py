@@ -4,7 +4,8 @@ from django.urls import reverse
 from django.template import loader
 from .models import Media
 from rest_framework import generics 
-from .serializers import MediaSerializer, GenreSerializer, PublisherSerializer
+from .serializers import MediaSerializer
+
 
 
 
@@ -24,6 +25,15 @@ def masterIndex(request):
                'name': 'Master Index',
                'sorting': 'Sorted by A-Z (All)'}
     return render(request, 'media/index.html', context)
+
+
+def searchResults(request):
+    serializer_class = MediaSerializer
+    query = request.GET.get('q')
+    item_list = Media.objects.filter(name__icontains=query)
+    context = {'item_list': item_list}
+    return render(request, 'media/search_results.html', context)
+
 
 
 class MediaDetail(generics.RetrieveAPIView):
@@ -161,11 +171,13 @@ class NetflixList(generics.ListAPIView):
 #     serializer_class = GenreSerializer
 
 
-class GenreList(generics.ListAPIView):
-    queryset = Media.objects.filter(genres__icontains='drama')
-    serializer_class = MediaSerializer
+# class GenreList(generics.ListAPIView):
+#     queryset = Media.objects.filter(genres__icontains='drama')
+#     serializer_class = MediaSerializer
 
 
-class PublisherList(generics.ListAPIView):
-    queryset = Media.objects.all()
-    serializer_class = PublisherSerializer
+# class PublisherList(generics.ListAPIView):
+#     queryset = Media.objects.all()
+#     serializer_class = PublisherSerializer
+    
+    

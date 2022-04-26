@@ -2,6 +2,7 @@ from django.urls import path, include
 from . import views
 
 
+
 # I included paths for both requesting pure json responses (api) AND for viewing the data in a browser view
 
 app_name = 'media'
@@ -9,12 +10,17 @@ app_name = 'media'
 
 urlpatterns = [
     # IN-BROWSER WITH SIMPLE USER NAV
+    # master index/homepage includes search bar
     path('', views.masterIndex, name='master_index'),
     path('<int:id>/', views.masterDetail, name='master_detail'),
     path('games/', views.gameIndex, name='game_index'),
     path('movies/', views.movieIndex, name='movie_index'),
     path('comics/', views.comicIndex, name='comic_index'),
     path('tvshows/', views.tvShowIndex, name='tvshow_index'),
+    
+    # search results
+    path('search/', views.searchResults, name='search_results'),
+    
     
     
     # PURE JSON RESPONSES (API)
@@ -60,10 +66,10 @@ urlpatterns = [
     path('api/items/netflix', views.NetflixList.as_view(), name='netflix-list-api'),
     
     # show all genres
-    path('api/drama', views.GenreList.as_view(), name='drama'),
+    # path('api/drama', views.GenreList.as_view(), name='drama'),
     
     # show all publishers
-    path('api/publishers', views.PublisherList.as_view(), name='publishers')
+    # path('api/publishers', views.PublisherList.as_view(), name='publishers')
     
     
     
