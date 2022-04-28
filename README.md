@@ -6,9 +6,13 @@ Meredith Bloom
 ### My techs:
 
 **Deployment:** Heroku 
+
 **Database:** Postgresql (the only directly Heroku compatible SQL db)
+
 **Framework:** Django (I've also worked with Laravel/PHP and Express/Node.js for back ends, but found that Django/Python was my favorite of the three)
+
 *requirements.txt file has all package dependencies.* 
+
 **Language:** Python
 
 
@@ -42,22 +46,22 @@ Before deploying my api and database to Heroku, I ensured that the data was corr
 
 ```
     class Media(models.Model):
-    id = models.IntegerField(blank=True, primary_key=True)
-    media_type = models.CharField(max_length=10, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    short_name = models.CharField(max_length=255, blank=True, null=True)
-    long_description = models.TextField(blank=True, null=True)
-    short_description = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-    review_url = models.CharField(max_length=255, blank=True, null=True)
-    review_score = models.DecimalField(max_digits=100, decimal_places=2, blank=True, null=True)
-    slug = models.CharField(max_length=255, blank=True, null=True)
-    genres = models.TextField(blank=True, null=True)  
-    created_by = models.TextField(blank=True, null=True)  
-    published_by = models.TextField(blank=True, null=True) 
-    franchises = models.TextField(blank=True, null=True)  
-    regions = models.TextField(blank=True, null=True) 
+        id = models.IntegerField(blank=True, primary_key=True)
+        media_type = models.CharField(max_length=10, null=True)
+        name = models.CharField(max_length=255, blank=True, null=True)
+        short_name = models.CharField(max_length=255, blank=True, null=True)
+        long_description = models.TextField(blank=True, null=True)
+        short_description = models.TextField(blank=True, null=True)
+        created_at = models.DateTimeField(blank=True, null=True)
+        updated_at = models.DateTimeField(blank=True, null=True)
+        review_url = models.CharField(max_length=255, blank=True, null=True)
+        review_score = models.DecimalField(max_digits=100, decimal_places=2, blank=True, null=True)
+        slug = models.CharField(max_length=255, blank=True, null=True)
+        genres = models.TextField(blank=True, null=True)  
+        created_by = models.TextField(blank=True, null=True)  
+        published_by = models.TextField(blank=True, null=True) 
+        franchises = models.TextField(blank=True, null=True)  
+        regions = models.TextField(blank=True, null=True) 
 
     class Meta:
         managed = True
