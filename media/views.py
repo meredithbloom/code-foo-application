@@ -3,19 +3,35 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
 from .models import Media
-from rest_framework import generics 
-from .serializers import MediaSerializer, GenreSerializer, PublisherSerializer
-
+from rest_framework import generics, filters 
+from .serializers import MediaSerializer
+import django_filters
+from .filters import MediaFilter
 
 
 # Create your views here.
 
-# GENERAL VIEWS (unfiltered)
+# GENERAL VIEWS 
 
 class MediaList(generics.ListAPIView):
     queryset = Media.objects.all().order_by('id')
     serializer_class = MediaSerializer
-    
+    filter_class = MediaFilter
+
+
+class SearchListView(generics.ListAPIView):
+    queryset = Media.objects.all()
+    serializer_class = MediaSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'short_name', 'slug']
+
+
+class MediaDetail(generics.RetrieveAPIView):
+    queryset = Media.objects.all().order_by('id')
+    serializer_class = MediaSerializer
+
+
+
 
 def masterIndex(request):
     queryset = Media.objects.all().order_by('id')
@@ -25,10 +41,12 @@ def masterIndex(request):
                'sorting': 'Sorted by A-Z (All)'}
     return render(request, 'media/index.html', context)
 
-
-class MediaDetail(generics.RetrieveAPIView):
-    queryset = Media.objects.all().order_by('id')
+def searchResults(request):
     serializer_class = MediaSerializer
+    query = request.GET.get('q')
+    item_list = Media.objects.filter(name__icontains=query)
+    context = {'item_list': item_list}
+    return render(request, 'media/search_results.html', context)
 
 
 def masterDetail(request, id):
@@ -156,16 +174,3 @@ class NetflixList(generics.ListAPIView):
     serializer_class = MediaSerializer
 
 
-# class GenreList(generics.ListAPIView):
-#     queryset = Media.objects.all()
-#     serializer_class = GenreSerializer
-
-
-class GenreList(generics.ListAPIView):
-    queryset = Media.objects.filter(genres__icontains='drama')
-    serializer_class = MediaSerializer
-
-
-class PublisherList(generics.ListAPIView):
-    queryset = Media.objects.all()
-    serializer_class = PublisherSerializer

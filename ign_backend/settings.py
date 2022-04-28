@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['localhost', 'code-foo-ign.herokuapp.com', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'django_filters',
     'corsheaders',
     'rest_framework',
     'media.apps.MediaConfig',
@@ -76,6 +77,12 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    )
+}
 
 WSGI_APPLICATION = 'ign_backend.wsgi.application'
 

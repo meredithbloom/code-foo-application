@@ -8,14 +8,14 @@ class MediaSerializer(serializers.ModelSerializer):
         
         
 
-class GenreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Media
-        fields = ('name', 'genres')
+# class GenreSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Media
+#         fields = ('name', 'genres')
         
         
         
-class PublisherSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Media
-        fields = ('name','published_by')
+# class PublisherSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Media
+#         fields = ('name','published_by')
