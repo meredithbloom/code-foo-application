@@ -1,6 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.http import Http404
-from django.urls import reverse
 from django.template import loader
 from .models import Media
 from rest_framework import generics, filters 
@@ -16,7 +15,7 @@ from .filters import MediaFilter
 class MediaList(generics.ListAPIView):
     queryset = Media.objects.all().order_by('id')
     serializer_class = MediaSerializer
-    # filter class includes optional query params for media type, genre, min rating, max rating
+    # filter class includes optional query params for media type, genre, min rating, max rating, creator, publisher
     filter_class = MediaFilter
     
 
@@ -24,6 +23,7 @@ class SearchListView(generics.ListAPIView):
     queryset = Media.objects.all()
     serializer_class = MediaSerializer
     filter_backends = [filters.SearchFilter]
+    # query param is "search" - will look for matches in below fields
     search_fields = ['name', 'short_name', 'slug']
 
 
