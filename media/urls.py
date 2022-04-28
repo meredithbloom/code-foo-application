@@ -23,7 +23,7 @@ urlpatterns = [
     
     
     # PURE JSON RESPONSES (API)
-    
+
     # api search - include search as query param - 'api/items/search?search='
     path('api/search', views.SearchListView.as_view(), name='api_search_results'),
     
