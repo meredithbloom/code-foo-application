@@ -18,14 +18,20 @@ urlpatterns = [
     path('comics/', views.comicIndex, name='comic_index'),
     path('tvshows/', views.tvShowIndex, name='tvshow_index'),
     
-    # search results
+    # in browser search results
     path('search/', views.searchResults, name='search_results'),
     
     
-    
     # PURE JSON RESPONSES (API)
-    #get all items (a-z)
+    
+    # api search
+    path('api/items/search', views.SearchListView.as_view(), name='api_search_results'),
+    # include search as query param
+    # 'api/items/search?search='
+    
+    #get all items (a-z). see additional filters for optional query params
     path('api/items', views.MediaList.as_view(), name='master_index_api'),
+    
     #get all items (review score, descending)
     path('api/items/rating', views.MediaListByRating.as_view(), name='all-by-rating-api'), 
     #show specific item
@@ -62,14 +68,7 @@ urlpatterns = [
     
     # other filters
     
-    # netflix
-    path('api/items/netflix', views.NetflixList.as_view(), name='netflix-list-api'),
-    
-    # show all genres
-    # path('api/drama', views.GenreList.as_view(), name='drama'),
-    
-    # show all publishers
-    # path('api/publishers', views.PublisherList.as_view(), name='publishers')
+
     
     
     
