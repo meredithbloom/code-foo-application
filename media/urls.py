@@ -24,51 +24,32 @@ urlpatterns = [
     
     # PURE JSON RESPONSES (API)
     
-    # api search
-    path('api/items/search', views.SearchListView.as_view(), name='api_search_results'),
-    # include search as query param
-    # 'api/items/search?search='
+    # api search - include search as query param - 'api/items/search?search='
+    path('api/search', views.SearchListView.as_view(), name='api_search_results'),
     
-    #get all items (a-z). see additional filters for optional query params
-    path('api/items', views.MediaList.as_view(), name='master_index_api'),
+    #get all items (a-z). see additional filters for optional query params. 
+    path('api/', views.MediaList.as_view(), name='master_index_api'),
     
-    #get all items (review score, descending)
-    path('api/items/rating', views.MediaListByRating.as_view(), name='all-by-rating-api'), 
+    #get all items ordered differently
+    path('api/ordered', views.OrderedView.as_view(), name='master_index_ordered_api'),
+    
     #show specific item
-    path('api/items/<int:pk>/', views.MediaDetail.as_view(), name='master_detail_api'),
+    path('api/<int:pk>/', views.MediaDetail.as_view(), name='master_detail_api'),
     
-    #get all games (a-z)
-    path('api/items/games', views.GameList.as_view(), name='game-list-api'),
-    #get all games (review score, descending)
-    path('api/items/games/rating', views.GameListByRating.as_view(), name='games-by-rating-api'), 
-    #show specific game
-    path('api/items/games/<int:pk>', views.GameDetail.as_view(), name='game-detail-api'),
+    #get all games (a-z), can order by review score with ordering query param
+    path('api/games', views.GameList.as_view(), name='game-list-api'),
+   
+    #get all movies (a-z), can order by review score with ordering query param
+    path('api/movies', views.MovieList.as_view(), name='movie-list-api'),
+ 
+    #get all comics (a-z), can order by review score with ordering query param
+    path('api/comics', views.ComicList.as_view(), name='comic-list-api'),
     
-    #get all movies (a-z)
-    path('api/items/movies', views.MovieList.as_view(), name='movie-list-api'),
-    #get all movies (review score, descending)
-    path('api/items/movies/rating', views.MovieListByRating.as_view(), name='movies-by-rating-api'), 
-    #get specific movie
-    path('api/items/movies/<int:pk>', views.MovieDetail.as_view(), name='movie-detail-api'),
-
-    #get all comics (a-z)
-    path('api/items/comics', views.ComicList.as_view(), name='comic-list-api'),
-    #get all comics (review score, descending)
-    path('api/items/comics/rating', views.ComicListByRating.as_view(), name='comics-by-rating-api'), 
-    #show specific comic
-    path('api/items/comics/<int:pk>', views.ComicDetail.as_view(), name='comic-detail-api'),
-
-    # get all tv shows (a-z)
-    path('api/items/shows', views.TVShowList.as_view(), name='tv-show-list-api'),
-    # get all tv shows (review score, descending)
-    path('api/items/shows/rating', views.TVShowListByRating.as_view(), name='tv-show-by-rating-api'), 
-    # get specific tv show
-    path('api/items/shows/<int:pk>', views.TVShowDetail.as_view(), name='tv-show-detail-api'),
+    # get all tv shows (a-z), can order by review score with ordering query param
+    path('api/shows', views.TVShowList.as_view(), name='tv-show-list-api'),
     
+   
     
-    # other filters
-    
-
     
     
     

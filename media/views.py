@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import Http404
 from django.urls import reverse
 from django.template import loader
 from .models import Media
@@ -9,15 +9,16 @@ import django_filters
 from .filters import MediaFilter
 
 
-# Create your views here.
 
 # GENERAL VIEWS 
 
+# all items (index)
 class MediaList(generics.ListAPIView):
     queryset = Media.objects.all().order_by('id')
     serializer_class = MediaSerializer
+    # filter class includes optional query params for media type, genre, min rating, max rating
     filter_class = MediaFilter
-
+    
 
 class SearchListView(generics.ListAPIView):
     queryset = Media.objects.all()
@@ -26,11 +27,18 @@ class SearchListView(generics.ListAPIView):
     search_fields = ['name', 'short_name', 'slug']
 
 
+# specific item (show)
 class MediaDetail(generics.RetrieveAPIView):
     queryset = Media.objects.all().order_by('id')
     serializer_class = MediaSerializer
 
 
+# trying to figure out how to include both content filters and ordering in same view
+class OrderedView(generics.ListAPIView):
+    queryset = Media.objects.all()
+    serializer_class = MediaSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['id', 'name', 'review_score']
 
 
 def masterIndex(request):
@@ -40,6 +48,7 @@ def masterIndex(request):
                'name': 'Master Index',
                'sorting': 'Sorted by A-Z (All)'}
     return render(request, 'media/index.html', context)
+
 
 def searchResults(request):
     serializer_class = MediaSerializer
@@ -60,10 +69,12 @@ def masterDetail(request, id):
 # FILTERED VIEWS (by media type)
 
 # GAME VIEWS
-
+# all games, ordered by id (A-Z) or review score
 class GameList(generics.ListAPIView):
     queryset = Media.objects.filter(media_type='Game')
     serializer_class = MediaSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['id', 'name', 'review_score']
     
 
 def gameIndex(request):
@@ -75,22 +86,14 @@ def gameIndex(request):
     return render(request, 'media/index.html', context)
 
 
-class GameListByRating(generics.ListAPIView):
-    queryset = Media.objects.filter(media_type='Game').order_by('-review_score')
-    serializer_class = MediaSerializer
-
-
-class GameDetail(generics.RetrieveAPIView):
-    queryset = Media.objects.filter(media_type='Game')
-    serializer_class = MediaSerializer
-    
-    
-
 # MOVIE VIEWS
-
+# all movies, ordered by id (A-Z) or review score
 class MovieList(generics.ListAPIView):
     queryset = Media.objects.filter(media_type='Movie')
     serializer_class = MediaSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['id', 'name', 'review_score']
+
 
 def movieIndex(request):
     queryset = Media.objects.filter(media_type='Movie').order_by('id')
@@ -100,19 +103,14 @@ def movieIndex(request):
                'sorting': 'Sorted by A-Z (All)'}
     return render(request, 'media/index.html', context)
 
-class MovieListByRating(generics.ListAPIView):
-    queryset = Media.objects.filter(media_type='Movie').order_by('-review_score')
-    serializer_class = MediaSerializer
-
-class MovieDetail(generics.RetrieveAPIView):
-    queryset = Media.objects.filter(media_type='Movie')
-    serializer_class = MediaSerializer
 
 # COMIC VIEWS
-
+# all comics, ordered by id (A-Z) or review score
 class ComicList(generics.ListAPIView):
     queryset = Media.objects.filter(media_type='Comic')
     serializer_class = MediaSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['id', 'name', 'review_score']
     
     
 def comicIndex(request):
@@ -124,21 +122,13 @@ def comicIndex(request):
     return render(request, 'media/index.html', context)
 
 
-class ComicListByRating(generics.ListAPIView):
-    queryset = Media.objects.filter(media_type='Comic').order_by('-review_score')
-    serializer_class = MediaSerializer
-
-class ComicDetail(generics.RetrieveAPIView):
-    queryset = Media.objects.filter(media_type='Comic')
-    serializer_class = MediaSerializer
-
-
 # TV SHOW VIEWS
-
-# all tv shows, ordered by id (A-Z)
+# all tv shows, ordered by id (A-Z) or review score
 class TVShowList(generics.ListAPIView):
     queryset = Media.objects.filter(media_type='Show')
     serializer_class = MediaSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['id', 'name', 'review_score']
     
     
 def tvShowIndex(request):
@@ -149,28 +139,9 @@ def tvShowIndex(request):
                'sorting': 'Sorted by A-Z (All)'}
     return render(request, 'media/index.html', context)
 
-# all tv shows, ordered by rating (descending)    
-class TVShowListByRating(generics.ListAPIView):
-    queryset = Media.objects.filter(media_type='Show').order_by('-review_score')
-    serializer_class = MediaSerializer
-
-# tv show detail
-class TVShowDetail(generics.RetrieveAPIView):
-    queryset = Media.objects.filter(media_type='Show')
-    serializer_class = MediaSerializer
 
 
-# SORTING VIEWS
 
-class MediaListByRating(generics.ListAPIView):
-    queryset = Media.objects.all().order_by('-review_score')
-    serializer_class = MediaSerializer
-    
 
-# MORE FILTERS
-
-class NetflixList(generics.ListAPIView):
-    queryset = Media.objects.filter(published_by__icontains='Netflix')
-    serializer_class = MediaSerializer
 
 
