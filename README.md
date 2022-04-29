@@ -76,7 +76,7 @@ csv file -> sql create table -> populated table by copying csv file -> later, dj
 
 ### The API Service
 
-
+I wanted to take advantage of Django's views feature, as I've always used React as a separate front end for my Django-backed projects. As such, I created an API with routes that return pure JSON data, as well as some *very* simple views for in-browser user navigation. Users can easily navigate between an index view and individual entries, with additional filters by media type (show, game, movie, comic). I also included a search bar. 
 
 **Installing dependencies**
 
@@ -85,6 +85,33 @@ csv file -> sql create table -> populated table by copying csv file -> later, dj
 3. and run: `pip install -r requirements.txt`
 
 
+Live Link: [Code Foo IGN Application](https://code-foo-ign.herokuapp.com/)
+
+#### API Endpoints
+
+Base URL: <https://code-foo-ign.herokuapp.com/>
+GET requests only.
+
+**GET All Items (default ordered by id/A-Z)**
+Request path: 
+`https://code-foo-ign.herokuapp.com/api`
+
+*Additional filters* 
+
+| Query Param | Options |
+| ----------- | ------- |
+| media_type | show, movie, comic, game |
+| genre | *single string* i.e. drama, horror, comedy |
+| min_rating | 0-10 |
+| max_rating | 0-10 |
+| created_by | *single string* i.e. netflix |
+| publisher | *single string* i.e. netflix |
+
+You can include multiple filters simultaneously, though only one value for genre/created_by/publisher. Strings are case insensitive (both Drama and drama will work).
+
+**GET specific item (by id)**
+Request path:
+`https://code-foo-ign.herokuapp.com/api/<id>/`
 
 admin site - 
 superuser
