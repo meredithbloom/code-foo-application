@@ -1,4 +1,4 @@
-# Code Foo Application Pt 2
+# Code Foo IGN Application Pt 2
 ## Hisui's New Power Plant
 Meredith Bloom
 

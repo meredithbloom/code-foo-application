@@ -1,6 +1,8 @@
-# code-foo ign application
-## Pt 3. Back End...
+# Code Foo IGN Application Part 3
+## Back End.
 Meredith Bloom
+
+(see voltorb markdown for part 2)
 
 
 ### My techs:
