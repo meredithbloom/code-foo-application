@@ -42,7 +42,7 @@ Before jumping into any serious coding, I took a little while to look over the d
 );
 ```
 
-Before deploying my api and database to Heroku, I ensured that the data was correctly reflected in a database I created on my local drive. Django automatically created a model based on the existing table/db that I had connected to my django project - kind of like a backwards migration. Django's literal translations and educated guesses about the data types for the columns were accurate, so I left the model mostly as-is, except for adjusting some additional parameters (i.e. Blank, null).
+Before deploying my api to Heroku, I ensured that the data was correctly reflected in a database I created on my local drive. Django automatically created a model based on the existing table/db that I had connected to my django project - kind of like a backwards migration. Django's literal translations and educated guesses about the data types for the columns were accurate, so I left the model mostly as-is, except for adjusting some additional parameters (i.e. Blank, null).
 
 ```
     class Media(models.Model):
@@ -76,7 +76,7 @@ csv file -> sql create table -> populated table by copying csv file -> later, dj
 
 ### The API Service
 
-I wanted to take advantage of Django's views feature, as I've always used React as a separate front end for my Django-backed projects. As such, I created an API with routes that return pure JSON data, as well as some *very* simple views for in-browser user navigation. Users can easily navigate between an index view and individual entries, with additional filters by media type (show, game, movie, comic). I also included a search bar. 
+I wanted to take advantage of Django's views feature, as I've always used React as a separate front end for my Django-backed projects. As such, I created an API with routes that return pure JSON data, as well as some *very* simple views (virtually zero styling) for in-browser user navigation. Users can easily navigate between an index view and individual entries, with additional filters by media type (show, game, movie, comic). I also included a search bar. 
 
 **Installing dependencies (for running on local drive)**
 
@@ -172,6 +172,12 @@ Request path(s) by media type:
 
 
 
-admin site - 
-superuser
-Pass4321
+### Using Django's Admin site for data review and manual clean-up 
+
+Though I didn't do any kind of manual data clean-up, Django has an admin feature that has full CRUD capabilities built in. Logging into the admin portal using the below credentials would allow you to make changes to the data directly, without having to write separate POST/PATCH/DELETE routes. Of course this log in information would normally be private, but for the sake of this application I thought I'd include it, because this feature is one of the reasons I like Django so much.
+
+
+`<https://code-foo-ign.herokuapp.com/admin>`
+
+username: superuser
+password: Pass4321
