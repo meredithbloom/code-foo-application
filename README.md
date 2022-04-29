@@ -18,7 +18,7 @@ Meredith Bloom
 
 ### Storing the Data
 
-Before jumping into any serious coding, I took a little while to look over the data in the csv file itself. I knew I needed to translate the csv to a sql-friendly format, and to do that, I needed to build a model for the database that the csv file would be pulled into (and aligned with). I wrote a SQL command that created a table with corresponding columns and data types that I determined based on my review of the raw data. The five final columns (genres, created_by, published_by, franchises, and regions) were the most varied, with some items having nothing listed at all, to some having multiple things listed under one category. As such, I made the data type for each of these columns an array of strings; I also knew that matching strings is a fairly easy way to execute a search request to an api, and I wanted clients to be able to filter/search for items based on genre, publisher, etc.. 
+Before jumping into any serious coding, I took a little while to look over the data in the csv file itself. I wrote a SQL command that created a table with corresponding columns and data types that I determined based on my review of the raw data. The five final columns (genres, created_by, published_by, franchises, and regions) were the most varied, with some items having nothing listed at all, to some having multiple things listed under one category. As such, I made the data type for each of these columns an array of strings; I also knew that matching strings is a fairly easy way to execute a search request to an api, and I wanted clients to be able to filter/search for items based on genre, publisher, etc.. 
 
 
 ```
@@ -85,11 +85,11 @@ I wanted to take advantage of Django's views feature, as I've always used React 
 3. and run: `pip install -r requirements.txt`
 
 
-Live Link: [Code Foo IGN Application](https://code-foo-ign.herokuapp.com/)
+Live Browsable Link: [Code Foo IGN Application](https://code-foo-ign.herokuapp.com/)
 
 #### API Endpoints - GET requests only
 
-Base URL: <https://code-foo-ign.herokuapp.com/api>
+Base API URL: <https://code-foo-ign.herokuapp.com/api>
 
 
 **GET All Items (default ordered by id/A-Z)**
