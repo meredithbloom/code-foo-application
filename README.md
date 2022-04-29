@@ -18,7 +18,7 @@ Meredith Bloom
 
 ### Storing the Data
 
-Before jumping into any serious coding, I took a little while to look over the data in the csv file itself. I knew I needed to translate the csv to a sql-friendly format, and to do that, I needed to build a model for the database that the csv file would be pulled into (and aligned with). I wrote a SQL command that created a table with corresponding columns and data types that I determined based on my review of the raw data. The five final columns (genres, created_by, published_by, franchises, and regions) were the most varied, with some items having nothing listed at all, to some having multiple things listed under one category. As such, I made the data type for each of these columns an array of strings; I also knew that matching strings is a fairly easy way to execute a search request to an api, and I wanted clients to be able to filter/search for items based on genre, publisher, etc.. 
+Before jumping into any serious coding, I took a little while to look over the data in the csv file itself. I wrote a SQL command that created a table with corresponding columns and data types that I determined based on my review of the raw data. The five final columns (genres, created_by, published_by, franchises, and regions) were the most varied, with some items having nothing listed at all, to some having multiple things listed under one category. As such, I made the data type for each of these columns an array of strings; I also knew that matching strings is a fairly easy way to execute a search request to an api, and I wanted clients to be able to filter/search for items based on genre, publisher, etc.. 
 
 
 ```
@@ -78,23 +78,24 @@ csv file -> sql create table -> populated table by copying csv file -> later, dj
 
 I wanted to take advantage of Django's views feature, as I've always used React as a separate front end for my Django-backed projects. As such, I created an API with routes that return pure JSON data, as well as some *very* simple views for in-browser user navigation. Users can easily navigate between an index view and individual entries, with additional filters by media type (show, game, movie, comic). I also included a search bar. 
 
-**Installing dependencies**
+**Installing dependencies (for running on local drive)**
 
 1. CD to directory with requirements.txt file
 2. activate virtualenv (local python environment)
 3. and run: `pip install -r requirements.txt`
 
 
-Live Link: [Code Foo IGN Application](https://code-foo-ign.herokuapp.com/)
+Live Browsable Link: [Code Foo IGN Application](https://code-foo-ign.herokuapp.com/)
 
 #### API Endpoints - GET requests only
 
-Base URL: <https://code-foo-ign.herokuapp.com/api>
+Base API URL: <https://code-foo-ign.herokuapp.com/api>
 
 
 **GET All Items (default ordered by id/A-Z)**
 
 Request path: 
+
 `https://code-foo-ign.herokuapp.com/api`
 
 *Additional filters* 
@@ -102,18 +103,74 @@ Request path:
 | Query Param | Options |
 | ----------- | ------- |
 | media_type | show, movie, comic, game |
-| genre | *single string* i.e. drama, horror, comedy |
+| genre | *single string* i.e. drama, horror, comedy, animation |
 | min_rating | 0-10 |
 | max_rating | 0-10 |
-| created_by | *single string* i.e. netflix |
-| publisher | *single string* i.e. netflix |
+| created_by | *single string* i.e. netflix, dreamworks |
+| publisher | *single string* i.e. netflix, universal |
 
 You can include multiple filters simultaneously, though only one value for genre/created_by/publisher. Strings are case insensitive (both Drama and drama will work).
 
 **GET specific item (by id)**
 
 Request path:
+
 `https://code-foo-ign.herokuapp.com/api/<id>/`
+
+
+**GET - search for item by name**
+
+Request path:
+
+`<https://code-foo-ign.herokuapp.com/api/search>`
+
+| Query Param | Options |
+| ----------- | ------- |
+| search | *string* search by name. will return all items that include string in name/slug |
+
+
+example:
+
+`<https://code-foo-ign.herokuapp.com/api/search?search=assassin>`
+
+
+
+**GET all items, custom order**
+
+
+Request path:
+
+`<https://code-foo-ign.herokuapp.com/api/ordered>`
+
+| Query Param | Options |
+| ----------- | ------- |
+| ordering | id, name, review_score. default is ascending, add - for descending (i.e. -review_score) |
+
+
+example - will return all items, ordered by descending review score:
+
+`<https://code-foo-ign.herokuapp.com/api/ordered/?ordering=-review_score>`
+
+
+
+**GET by media type, custom order**
+
+Request path(s) by media type:
+
+`<https://code-foo-ign.herokuapp.com/api/games>` OR
+
+`<https://code-foo-ign.herokuapp.com/api/movies>` OR
+
+`<https://code-foo-ign.herokuapp.com/api/comics>` OR
+
+`<https://code-foo-ign.herokuapp.com/api/shows>` OR
+
+
+| Query Param | Options |
+| ----------- | ------- |
+| ordering | id, name, review_score. default is ascending, add - for descending (i.e. -review_score) |
+
+
 
 admin site - 
 superuser
