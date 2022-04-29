@@ -87,12 +87,13 @@ I wanted to take advantage of Django's views feature, as I've always used React 
 
 Live Link: [Code Foo IGN Application](https://code-foo-ign.herokuapp.com/)
 
-#### API Endpoints
+#### API Endpoints - GET requests only
 
-Base URL: <https://code-foo-ign.herokuapp.com/>
-GET requests only.
+Base URL: <https://code-foo-ign.herokuapp.com/api>
+
 
 **GET All Items (default ordered by id/A-Z)**
+
 Request path: 
 `https://code-foo-ign.herokuapp.com/api`
 
@@ -110,6 +111,7 @@ Request path:
 You can include multiple filters simultaneously, though only one value for genre/created_by/publisher. Strings are case insensitive (both Drama and drama will work).
 
 **GET specific item (by id)**
+
 Request path:
 `https://code-foo-ign.herokuapp.com/api/<id>/`
 
