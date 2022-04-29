@@ -180,4 +180,5 @@ Though I didn't do any kind of manual data clean-up, Django has an admin feature
 `<https://code-foo-ign.herokuapp.com/admin>`
 
 username: superuser
+
 password: Pass4321
