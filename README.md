@@ -78,7 +78,7 @@ csv file -> sql create table -> populated table by copying csv file -> later, dj
 
 I wanted to take advantage of Django's views feature, as I've always used React as a separate front end for my Django-backed projects. As such, I created an API with routes that return pure JSON data, as well as some *very* simple views for in-browser user navigation. Users can easily navigate between an index view and individual entries, with additional filters by media type (show, game, movie, comic). I also included a search bar. 
 
-**Installing dependencies**
+**Installing dependencies (for running on local drive)**
 
 1. CD to directory with requirements.txt file
 2. activate virtualenv (local python environment)
@@ -95,6 +95,7 @@ Base URL: <https://code-foo-ign.herokuapp.com/api>
 **GET All Items (default ordered by id/A-Z)**
 
 Request path: 
+
 `https://code-foo-ign.herokuapp.com/api`
 
 *Additional filters* 
@@ -102,18 +103,74 @@ Request path:
 | Query Param | Options |
 | ----------- | ------- |
 | media_type | show, movie, comic, game |
-| genre | *single string* i.e. drama, horror, comedy |
+| genre | *single string* i.e. drama, horror, comedy, animation |
 | min_rating | 0-10 |
 | max_rating | 0-10 |
-| created_by | *single string* i.e. netflix |
-| publisher | *single string* i.e. netflix |
+| created_by | *single string* i.e. netflix, dreamworks |
+| publisher | *single string* i.e. netflix, universal |
 
 You can include multiple filters simultaneously, though only one value for genre/created_by/publisher. Strings are case insensitive (both Drama and drama will work).
 
 **GET specific item (by id)**
 
 Request path:
+
 `https://code-foo-ign.herokuapp.com/api/<id>/`
+
+
+**GET - search for item by name**
+
+Request path:
+
+`<https://code-foo-ign.herokuapp.com/api/search>`
+
+| Query Param | Options |
+| ----------- | ------- |
+| search | *string* search by name. will return all items that include string in name/slug |
+
+
+example:
+
+`<https://code-foo-ign.herokuapp.com/api/search?search=assassin>`
+
+
+
+**GET all items, custom order**
+
+
+Request path:
+
+`<https://code-foo-ign.herokuapp.com/api/ordered>`
+
+| Query Param | Options |
+| ----------- | ------- |
+| ordering | id, name, review_score. default is ascending, add - for descending (i.e. -review_score) |
+
+
+example - will return all items, ordered by descending review score:
+
+`<https://code-foo-ign.herokuapp.com/api/ordered/?ordering=-review_score>`
+
+
+
+**GET by media type, custom order**
+
+Request path(s) by media type:
+
+`<https://code-foo-ign.herokuapp.com/api/games>` OR
+
+`<https://code-foo-ign.herokuapp.com/api/movies>` OR
+
+`<https://code-foo-ign.herokuapp.com/api/comics>` OR
+
+`<https://code-foo-ign.herokuapp.com/api/shows>` OR
+
+
+| Query Param | Options |
+| ----------- | ------- |
+| ordering | id, name, review_score. default is ascending, add - for descending (i.e. -review_score) |
+
+
 
 admin site - 
 superuser
