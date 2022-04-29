@@ -1,5 +1,5 @@
 # Code Foo IGN Application Part 3
-## Back End.
+## Back End
 Meredith Bloom
 
 (see voltorb markdown for part 2)
