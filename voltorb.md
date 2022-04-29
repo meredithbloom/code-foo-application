@@ -11,7 +11,7 @@ Voltorbs can cleanly and efficiently produce electricity. An average Voltorb is 
 **Objective:** How many Voltorbs will you need to catch to fully power the village. Describe each step in your thought process.
 
 
-Questions and subsequent thought process:
+**Questions and subsequent thought process:**
 
 1. How much electricity do we need to produce to fully power Jubilife Village?
     - How many people live in Jubilife village?
@@ -40,9 +40,14 @@ Questions and subsequent thought process:
 
 Given the Pokemon universe bears striking (and intentional) resemblance to real places, I wanted to see if Jubilife Village was based on a real city. According to [this link](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_world_in_relation_to_the_real_world), Jubilife Village appears to be based on [Sapporo](https://en.wikipedia.org/wiki/Sapporo), the largest city on Hokkaido, the northernmost main island of Japan. I tried to find a value for the amount of electricity that Sapporo consumes, but wasn't able to find anything conclusive for the city as a whole. But what if I look at electricity use per person?
 
-According to the [Jubilife Village Bulbapedia wiki page](https://bulbapedia.bulbagarden.net/wiki/Jubilife_City), in Pokemon Platinum it's the fourth largest city in the Pokemon world, with a population of 124. This doesn't account for tourists, of which Jubilife Village likely has many. But for the sake of finding a flat number to work off of, I'll say 124. How much does electricity does each person use?
 
-According to [this link](https://www.worlddata.info/asia/japan/energy-consumption.php), Japan's per capita electricity consumption is ~7.5k kWh (per person, per year). Multiply that by 124 (the population of Jubilife Village) and you get 930,000 kWh. So I'll say that we need to be able to produce just under 1 million kWh of electricity to fully power Jubilife Village (leaving some wiggle room for major events).
+According to the [Jubilife Village Bulbapedia wiki page](https://bulbapedia.bulbagarden.net/wiki/Jubilife_City), in Pokemon Platinum Jubilife Village is the fourth largest city in the Pokemon world, with a population of 124. This doesn't account for tourists, of which Jubilife Village likely has many. But for the sake of finding a flat number to work off of, I'll say 124. How much does electricity does each person use?
 
 
-From a realistic engineering perspective, we'd probably need to use some kind of differential equation(s) to calculate the number of Voltorbs needed to fully power Jubilife Village. But my high school calculus class has all but disappeared in my rear view mirror, and I'm not sure how much electricity a Voltorb can produce, which is the other crucial variable we need to consider (aside from how much electricity we need to power the city, which we've estimated).
+According to [this link](https://www.worlddata.info/asia/japan/energy-consumption.php), Japan's per capita electricity consumption is ~7.5k kWh (per person, per year). Multiply that by 124 (the population of Jubilife Village) and you get 930,000 kWh. So I'll say that we need to be able to produce just under 1 million kWh of electricity to fully power Jubilife Village (leaving some wiggle room for major events) for a year.
+
+
+Given a Pokemon's rarity seems to positively correlate with that Pokemon's strength, Voltorbs are probably pretty strong. To make sure our Voltorb employees get adequate time off of work, I'll estimate that a single Voltorb can produce 120k kWh of electricity over the course of a year, 10k kWh a month, with relative ease. If a single Voltorb can produce 120k kWh of electricity a year, we need, at minimum (rounding up to nearest whole number) 9 Voltorbs to fully power Jubilife Village. Just to be safe, let's keep 10 Voltorbs on staff for our new power plant. 
+
+
+From a realistic engineering perspective, we'd probably have to use some kind of differential equation(s) to calculate the number of Voltorbs needed to fully power Jubilife Village, and what their shifts would have to be, etc.. But my high school calculus class has all but disappeared in my rear view mirror, so this will have to do :smiley:. 
